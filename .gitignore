@@ -121,6 +121,7 @@ celerybeat.pid
 
 # Environments
 .env
+pywebdriver/
 .venv
 env/
 venv/
