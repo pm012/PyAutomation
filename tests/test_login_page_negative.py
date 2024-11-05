@@ -9,7 +9,7 @@ class TestNegativeScenarios:
     @pytest.mark.negative
     @pytest.mark.parametrize("username, password, expected_error_message",
                              [("incorrectUser", "Password123", "Your username is invalid!"),
-                              ("student", "Password1234", "Your password is invalid!")])
+                              ("student", "Password1234", "Your password is invalid!")]) # Each tuple in brackets after parameter names contains set of parameters to run the test
     def test_negative_username(self, driver, username, password, expected_error_message):
         # Test case 2: Negative username test
         # Open page

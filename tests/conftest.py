@@ -1,19 +1,23 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+
 import geckodriver_autoinstaller
 
 import pytest
 
 
-@pytest.fixture()
+@pytest.fixture(params=["chrome", "firefox"]) # to run tests both in chrome and firefox
 def driver(request):
 
-    browser = request.config.getoption("--browser")
+    # browser = request.config.getoption("--browser") # to run tests separately  in chrome and firefox using --browser in command line
+    browser = request.param
     print(f"Creating {browser} driver")
     if browser == 'chrome':
         my_driver = webdriver.Chrome()
     elif browser == "firefox":
         geckodriver_autoinstaller.install()
-        my_driver = webdriver.Firefox()
+        service = Service("/snap/bin/firefox.geckodriver")
+        my_driver = webdriver.Firefox( service=service)        
     else:
         raise TypeError(f"Expected 'chrome' or 'firefox' but got {browser}")
     yield my_driver
