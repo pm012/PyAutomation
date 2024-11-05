@@ -18,7 +18,7 @@ def driver(request):
         raise TypeError(f"Expected 'chrome' or 'firefox' but got {browser}")
     yield my_driver
     print(f"Closing {browser} driver")
-    my_driver.quit()
+    my_driver.quit() #my_driver.close() closes only current tab
 
 
 def pytest_addoption(parser):
