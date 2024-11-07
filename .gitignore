@@ -8,6 +8,7 @@ __pycache__/
 
 # VSCode configuration files
 .vscode
+.idea
 
 # Distribution / packaging
 .Python
