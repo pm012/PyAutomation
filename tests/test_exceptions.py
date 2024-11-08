@@ -28,9 +28,9 @@ class TestNoSuchElementException:
         add_button.click()
         logger.info("Add button clicked")
 
-        # 3. Verify Row 2 input field is displayed
-        try:
-            row2_input = driver.find_element(By.XPATH, "//div[@id='row2']/input-example")
-            driver.verify(row2_input.is_displayed())
-        except NoSuchElementException:
-            logger.error("Row 2 input field is not displayed")
+        # 3. Verify Row 2 input field is displayed        
+        row2_input = driver.find_element(By.XPATH, "//div[@id='row2']/input")
+        driver.verify(row2_input.is_displayed())
+        #except NoSuchElementException:
+         #   logger.error("Row 2 input field is not displayed")
+            
