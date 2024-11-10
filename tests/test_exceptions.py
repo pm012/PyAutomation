@@ -81,8 +81,8 @@ The same action used to throw ElementNotVisibleException, but now it throws a di
         logger.info(message_el.text)
         assert message_el.text == 'Row 2 was saved', "Confirmation message is not as it expected"
 
-    #@pytest.mark.exceptions
-    @pytest.mark.debug
+    @pytest.mark.exceptions
+    #@pytest.mark.debug
     def test_invalid_element_state_exception(self, driver):
         # Test case 3: InvalidElementStateException
         # 1. Open page
@@ -118,7 +118,50 @@ The same action used to throw ElementNotVisibleException, but now it throws a di
         confirmation_text = confirmation_message.text
         assert confirmation_text == "Row 1 was saved", "Confirmation message is incorrect"
 
-       
+
+    @pytest.mark.exceptions
+    #@pytest.mark.debug
+    def test_invalid_element_state_exception(self, driver):
+            # Test case 3: InvalidElementStateException
+            # 1. Open page
+            driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+            logger.info("Page opened: https://practicetestautomation.com/practice-test-exceptions/")
+
+            # 2. Find the instructions text element (id=instructions) 
+            #instructions_el = driver.find_element(By.ID, "instructions")            # we don't need it with wait
+            
+
+            # 3 Press add button
+            add_btn = driver.find_element(By.ID, "add_btn")
+            add_btn.click()
+            
+            
+            # 4. Verify instructions text element is no longer displayed
+            # To avoid stale element exception the element absense should be checked using waits
+            wait = WebDriverWait(driver, 10)
+            assert wait.until(ec.invisibility_of_element_located((By.ID, "instructions")), "Instructions are present") # invisibility_of_element() will result the same stale element exception
+            # assert not instructions_el.is_displayed(), "Instructions are present" #-will result in stale element exeption
+            
+            
+    #@pytest.mark.exceptions
+    @pytest.mark.debug
+    def test_invalid_element_state_exception(self, driver):
+            # Test case 3: InvalidElementStateException
+            # 1. Open page
+            driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+            logger.info("Page opened: https://practicetestautomation.com/practice-test-exceptions/")
+
+
+            # Click Add button
+            add_btn = driver.find_element(By.ID, "add_btn")
+            add_btn.click()
+            
+
+            # Wait for 3 seconds for the second input field to be displayed
+            wait = WebDriverWait(driver, 6)        # to get timeout exception use wait = WebDriverWait(driver, 3)        
+        
+            # Verify second input field is displayed
+            row2_input = wait.until(ec.presence_of_all_elements_located((By.XPATH, "//div[@id='row2']/input")))[0] # provide locator as tuple
         
 
         
