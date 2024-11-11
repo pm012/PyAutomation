@@ -27,18 +27,18 @@ class BasePage:
     def current_url(self) -> str:
         return self._driver.current_url
     
-    def is_displayed(self, locator: tuple) -> bool:
+    def _is_displayed(self, locator: tuple) -> bool:
         try:
             return self._find(locator).is_displayed()
         except NoSuchElementException:
             return False
         
-    def open_url (self, url: str):
-        self._driver.get(self.url)
+    def _open_url (self, url: str):
+        self._driver.get(url)
 
     def _get_text(self, locator: tuple, time: int = 10) -> str:
         self._wait_until_element_is_visible(locator, time)
-        return self.__find(locator).text
+        return self._find(locator).text
 
 
         
