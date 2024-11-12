@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as ec
-from page_objects.base_page import BasePage
+from base_page import BasePage
 
 class LoginPage(BasePage):
     __url = "https://practicetestautomation.com/practice-test-login/"

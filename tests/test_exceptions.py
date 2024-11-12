@@ -4,6 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
+from tests.page_objects.exceptions_page import ExceptionsPage
+
+
 logger = logging.getLogger(__name__)
 
 class TestExceptions:
@@ -21,16 +24,16 @@ Row 2 doesn’t appear immediately. This test will fail with org.openqa.selenium
     def test_no_such_element_exception(self, driver):
         # Test case 1: NoSuchElementException
         # 1. Open page
-        driver.get("https://practicetestautomation.com/practice-test-exceptions/")
-        logger.info("Page opened: https://practicetestautomation.com/practice-test-exceptions/")
+        exceptions_page = ExceptionsPage(driver)
+        exceptions_page._open()
+
 
         # 2. Click Add button
-        add_button = driver.find_element(By.ID, "add_btn")
-        add_button.click()
+        exceptions_page._find((By.ID, "add_btn")).click()
         logger.info("Add button clicked")
 
         wait = WebDriverWait(driver, 10) 
-        # Excplicit wait
+        # Explicit wait
         row2_input_el = wait.until(ec.presence_of_all_elements_located((By.XPATH, "//div[@id='row2']/input")))[0] # provide locator as tuple
 
         # 3. Verify Row 2 input field is displayed                
@@ -138,7 +141,7 @@ The same action used to throw ElementNotVisibleException, but now it throws a di
             # To avoid stale element exception the element absense should be checked using waits
             wait = WebDriverWait(driver, 10)
             assert wait.until(ec.invisibility_of_element_located((By.ID, "instructions")), "Instructions are present") # invisibility_of_element() will result the same stale element exception
-            # assert not instructions_el.is_displayed(), "Instructions are present" #-will result in stale element exeption
+            # assert not instructions_el.is_displayed(), "Instructions are present" #-will result in stale element exception
             
             
     #@pytest.mark.exceptions
