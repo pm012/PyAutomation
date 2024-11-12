@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-from tests.page_objects.exceptions_page import ExceptionsPage
+from page_objects.exceptions_page import ExceptionsPage
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +20,8 @@ Test case 1: NoSuchElementException
 
 Row 2 doesn’t appear immediately. This test will fail with org.openqa.selenium.NoSuchElementException without proper wait"""
 
-    @pytest.mark.exceptions
+    #@pytest.mark.exceptions
+    @pytest.mark.debug
     def test_no_such_element_exception(self, driver):
         # Test case 1: NoSuchElementException
         # 1. Open page
@@ -29,15 +30,12 @@ Row 2 doesn’t appear immediately. This test will fail with org.openqa.selenium
 
 
         # 2. Click Add button
-        exceptions_page._find((By.ID, "add_btn")).click()
+        exceptions_page._add_btn_click()
         logger.info("Add button clicked")
 
-        wait = WebDriverWait(driver, 10) 
-        # Explicit wait
-        row2_input_el = wait.until(ec.presence_of_all_elements_located((By.XPATH, "//div[@id='row2']/input")))[0] # provide locator as tuple
-
         # 3. Verify Row 2 input field is displayed                
-        assert row2_input_el.is_displayed(), "Row 2 should be displayed, but it's not"
+        exceptions_page._verify_row2_input_is_displayed()
+        
 
     """Test case 2: ElementNotInteractableException
 
@@ -144,8 +142,8 @@ The same action used to throw ElementNotVisibleException, but now it throws a di
             # assert not instructions_el.is_displayed(), "Instructions are present" #-will result in stale element exception
             
             
-    #@pytest.mark.exceptions
-    @pytest.mark.debug
+    @pytest.mark.exceptions
+    #@pytest.mark.debug
     def test_invalid_element_state_exception(self, driver):
             # Test case 3: InvalidElementStateException
             # 1. Open page

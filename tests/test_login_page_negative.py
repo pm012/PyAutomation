@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 import pytest
 import logging
 from page_objects.login_page import LoginPage
