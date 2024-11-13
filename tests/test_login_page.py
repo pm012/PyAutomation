@@ -9,7 +9,7 @@ class TestPositiveScenarios:
         login_page = LoginPage(driver)
         # navigate to webpage
         login_page.open()        
-        # Type usename to Username input
+        # Type username to Username input
         # Type password
         # Click Submit button
         login_page.execute_login("student", "Password123")
@@ -18,7 +18,7 @@ class TestPositiveScenarios:
         # Verify new page URL contains practicetestautomation.com/logged-in-successfully/        
         assert logged_in_page.expected_url == logged_in_page.current_url, "Actual URL is not the same as expected"
         
-        # Verify new page conains expected text ('Congratulations' or successfully        
+        # Verify new page contains expected text ('Congratulations' or successfully
         assert logged_in_page.header == "Logged In Successfully", "Header is not as expected"
 
         # Verify Log out button is present on new page
