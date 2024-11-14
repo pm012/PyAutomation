@@ -1,6 +1,6 @@
 import pytest
 import logging
-from tests.page_objects.exceptions_page import ExceptionsPage
+from page_objects.exceptions_page import ExceptionsPage
 
 logger = logging.getLogger(__name__)
 

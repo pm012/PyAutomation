@@ -1,7 +1,7 @@
 import logging
 
 from selenium.webdriver.common.by import By
-from tests.page_objects.base_page import BasePage
+from .base_page import BasePage
 from selenium.webdriver.remote.webdriver import WebDriver
 
 
